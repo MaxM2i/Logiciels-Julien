@@ -1,0 +1,9 @@
+{
+    "name": "Analyse des risques",
+    "short_name": "Risques",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f3f6fa",
+    "theme_color": "#7a3fb5",
+    "icons": []
+}
