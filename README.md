@@ -1,26 +1,16 @@
-# Logiciels Julien — Web + application desktop
+# Logiciels Julien — version projets partagés et postes types
 
-## Contenu
-- `log-forage/` : application web Log de forage
-- `analyse-risques/` : application web Analyse des risques
-- `electron/` : lanceur desktop Electron
-- `shared/` : styles et utilitaires communs
+## Nouveautés
+- Export/import d'un projet au format JSON pour partager avec un collègue.
+- Bibliothèque visuelle des projets enregistrés sur cet appareil.
+- Import d'un projet reçu dans le logiciel.
+- Logo/image d'entreprise dans chaque projet (fichier image jusqu'à 2 Mo).
+- Analyse des risques : postes types récurrents avec risques, EPC, EPI, autorisations et formations pré-cochés.
+- Possibilité de modifier les cases, puis d'enregistrer un poste modifié comme nouveau prérequis réutilisable.
+- Icônes visuelles pour équipements, protections et risques.
 
-## Web
-Depuis un serveur HTTP local, ouvrir :
-- `log-forage/index.html`
-- `analyse-risques/index.html`
+## Données et partage
+Les projets enregistrés localement sont propres au navigateur/appareil. Pour partager, utiliser **Exporter le projet** puis transmettre le fichier `.json`. Le destinataire ouvre ce fichier depuis l'accueil avec **Ouvrir un projet reçu**. Les images de logo sont intégrées au projet exporté.
 
-Pour un test rapide avec Node : `npx serve .` depuis ce dossier.
-
-## Desktop
-1. Installer Node.js.
-2. Dans `electron/`, exécuter `npm install`.
-3. Exécuter `npm start`.
-4. Le lanceur permet d'ouvrir les deux logiciels.
-
-## Données
-La V1 utilise `localStorage` : les données restent dans le navigateur / profil Electron. Chaque logiciel permet un export JSON du projet.
-
-## Périmètre V1
-La saisie, l'administration des listes, les tableaux de synthèse, les fiches de poste, l'impression et les exports CSV/JSON sont présents. La représentation graphique avancée de la coupe de forage, la gestion multi-projets persistante côté serveur, les comptes utilisateurs et l'export PDF natif sont à prévoir dans une V2.
+## Lancement
+Ouvrir le dossier `logiciels_julien_v2` dans VS Code et utiliser Live Server. Garder l'arborescence `log-forage`, `analyse-risques`, `shared`.

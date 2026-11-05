@@ -1,12 +1,1 @@
-{
-    "name": "logiciels-julien",
-    "version": "1.0.0",
-    "description": "Applications Julien - Log de forage et Analyse des risques",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron ."
-    },
-    "devDependencies": {
-        "electron": "^38.2.1"
-    }
-}
+{"name":"logiciels-julien","version":"2.0.0","main":"main.js","scripts":{"start":"electron ."},"devDependencies":{"electron":"^31.0.0"}}

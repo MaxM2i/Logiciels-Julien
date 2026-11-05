@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <meta name="theme-color" content="#7a3fb5">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Analyse des risques</title>
     <link rel="stylesheet" href="../shared/styles.css">
     <link rel="manifest" href="manifest.json">
@@ -12,53 +11,17 @@
 
 <body>
     <div class="app">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-head">
-                <div class="brand">ANALYSE DES RISQUES<small>Analyse &amp; fiches de poste</small></div>
-                <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu"
-                    aria-expanded="false" aria-controls="nav">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+        <aside class="sidebar">
+            <div class="brand">ANALYSE DES RISQUES<small>Tableau / fiche de poste</small></div>
             <nav class="nav" id="nav"><button data-view="dashboard">Accueil</button><button
-                    data-view="projet">Projet</button><button data-view="taches">Tâches / risques</button><button
-                    data-view="analyse">Analyse des risques</button><button data-view="fiches">Fiches de
-                    poste</button><button data-view="admin">Administration</button></nav>
+                    data-view="projet">Projet</button><button data-view="taches">Tâches</button><button
+                    data-view="analyse">Analyse</button><button data-view="fiches">Fiches de poste</button><button
+                    data-view="admin">Administration</button></nav>
         </aside>
         <main class="main">
             <div id="app"></div>
         </main>
     </div>
-    <script>
-        /* Menu burger (mobile / tablette) */
-        (function () {
-            var sidebar = document.getElementById('sidebar');
-            var burger = document.getElementById('burger');
-            var nav = document.getElementById('nav');
-            function setOpen(open) {
-                document.body.classList.toggle('menu-open', open);
-                burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-                burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
-            }
-            burger.addEventListener('click', function () {
-                setOpen(!document.body.classList.contains('menu-open'));
-            });
-            /* Ferme le menu après un clic sur une entrée de navigation */
-            nav.addEventListener('click', function (e) {
-                if (e.target && e.target.closest && e.target.closest('button')) setOpen(false);
-            });
-            /* Ferme le menu si on tape sur le voile ou hors du menu */
-            document.addEventListener('click', function (e) {
-                if (!document.body.classList.contains('menu-open')) return;
-                if (sidebar.contains(e.target)) return;
-                setOpen(false);
-            });
-            /* Ferme le menu avec la touche Échap */
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') setOpen(false);
-            });
-        })();
-    </script>
     <script src="../shared/app-utils.js"></script>
     <script src="app.js"></script>
 </body>

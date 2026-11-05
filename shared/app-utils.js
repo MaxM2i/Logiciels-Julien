@@ -1,11 +1,12 @@
-window.AppUtils = {
-    uid(prefix = 'id') { return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8) },
-    esc(v = '') { return String(v).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c])) },
-    toast(msg) { let e = document.createElement('div'); e.className = 'toast'; e.textContent = msg; document.body.appendChild(e); setTimeout(() => e.remove(), 2200) },
-    save(key, obj) { localStorage.setItem(key, JSON.stringify(obj)) },
-    load(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback } },
-    download(name, text, type = 'application/json') { let a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click(); URL.revokeObjectURL(a.href) },
-    print() { window.print() },
-    csv(name, rows) { let s = rows.map(r => r.map(x => '"' + String(x ?? '').replaceAll('"', '""') + '"').join(';')).join('\n'); this.download(name, s, 'text/csv;charset=utf-8') },
-    date(v) { return v ? new Date(v).toLocaleDateString('fr-FR') : '' }
+
+window.AppUtils={
+ esc:s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])),
+ load:(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??structuredClone(d)}catch{return structuredClone(d)}},
+ save:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),
+ date:s=>s?new Date(s+'T00:00:00').toLocaleDateString('fr-FR'): '—',
+ toast:m=>{let x=document.createElement('div');x.className='toast';x.textContent=m;document.body.appendChild(x);setTimeout(()=>x.remove(),2200)},
+ print:()=>window.print(),
+ download:(name,text,type='application/json')=>{let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)},
+ csv:(name,rows)=>{let s=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(';')).join('\n');AppUtils.download(name,s,'text/csv;charset=utf-8')},
+ num:v=>{let n=parseFloat(String(v).replace(',','.'));return Number.isFinite(n)?n:null}
 };
