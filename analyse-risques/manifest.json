@@ -1,9 +1,1 @@
-{
-    "name": "Analyse des risques",
-    "short_name": "Risques",
-    "start_url": "./index.html",
-    "display": "standalone",
-    "background_color": "#eef3f8",
-    "theme_color": "#0b5cab",
-    "lang": "fr"
-}
+{"name":"Analyse des risques","short_name":"Risques","start_url":"./index.html","display":"standalone","background_color":"#eef3f8","theme_color":"#0b5cab","lang":"fr"}

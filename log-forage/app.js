@@ -125,7 +125,7 @@ function action(a){
  if(a==='save'){save();U.toast('Projet enregistré')}
  if(a==='new'&&confirm('Créer un nouveau projet ? Les listes d’administration seront conservées.')){let admin=state.admin;state=normalize({project:{...defaults.project},lithology:[],tubage:[],complements:[],development:{...defaults.development},admin});save();setView('projet')}
  if(a==='csv'){U.csv('synthese-log-forage.csv',[['Profondeur','Lithologie','COV','Eau','Tubage','Diamètres','Annulaire','Commentaire'],...state.lithology.map(r=>{let t=findTubage(r);return [`${r.from}-${r.to}`,r.lithology,r.cov,r.water,t.nature||'',`${t.id||''} / ${t.od||''}`,t.annular||'',r.comment]})])}
- if(a==='export')exportProject('download');
+ if(a==='export')exportProject('save');
  if(a==='export-folder')exportProject('folder');
  if(a==='export-email')exportProject('email');
  if(a==='import')document.querySelector('#file-import')?.click();
@@ -138,7 +138,7 @@ document.addEventListener('change',e=>{
 window.addEventListener('error',e=>{const app=document.querySelector('#app');if(app&&app.innerHTML.trim()==='')app.innerHTML=`<div class="card"><h2>Erreur de démarrage</h2><p>${U.esc(e.message)}</p></div>`});
 
 function safeFileName(s){return (s||'log-forage-projet').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9-_]+/gi,'_')||'log-forage-projet'}
-async function exportProject(mode='download'){const payload={format:'logiciels-julien-log-forage',version:1,exportedAt:new Date().toISOString(),...JSON.parse(JSON.stringify(state))};const name=safeFileName(state.project.name)+'.json',content=JSON.stringify(payload,null,2);if(mode==='folder')return U.saveToFolder(name,content,'application/json');if(mode==='email')return U.emailFile(name,content,'application/json','Projet - '+(state.project.name||'Log de forage'));U.download(name,content,'application/json');U.toast('Export prêt : vérifiez le dossier Téléchargements')}
+async function exportProject(mode='save'){const payload={format:'logiciels-julien-log-forage',version:1,exportedAt:new Date().toISOString(),...JSON.parse(JSON.stringify(state))};const name=safeFileName(state.project.name)+'.json',content=JSON.stringify(payload,null,2);if(mode==='folder'||mode==='save')return U.saveFileDialog(name,content,'application/json');if(mode==='email')return U.emailFile(name,content,'application/json','Projet - '+(state.project.name||'Log de forage'));}
 function saveToLibrary(){const snapshot=JSON.parse(JSON.stringify(state));snapshot.updated=new Date().toLocaleString('fr-FR');const key=snapshot.project.name||snapshot.project.site||'Projet sans nom';const ix=projectLibrary.findIndex(x=>(x.project?.name||x.project?.site||'Projet sans nom')===key);if(ix>=0)projectLibrary[ix]=snapshot;else projectLibrary.push(snapshot);U.save(LIBKEY,projectLibrary);U.toast('Projet ajouté à la bibliothèque');if(view==='dashboard')render()}
 document.addEventListener('change',e=>{if(e.target&&e.target.id==='file-import'&&e.target.files&&e.target.files[0]){const r=new FileReader();r.onload=()=>{try{const obj=JSON.parse(r.result);if(!obj.project||!Array.isArray(obj.lithology))throw new Error('Format de projet non reconnu');state=normalize(obj);save();saveToLibrary();setView('dashboard');U.toast('Projet importé')}catch(err){alert('Impossible d’ouvrir le projet : '+err.message)}};r.readAsText(e.target.files[0]);e.target.value=''}});
 render();
