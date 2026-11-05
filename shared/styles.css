@@ -1,0 +1,587 @@
+:root {
+    --bg: #f3f6fa;
+    --surface: #fff;
+    --ink: #172033;
+    --muted: #667085;
+    --primary: #0b5cab;
+    --primary2: #083b73;
+    --accent: #11a36a;
+    --danger: #c62828;
+    --border: #dbe2ea;
+    --shadow: 0 8px 24px rgba(23, 32, 51, .08);
+    --radius: 14px;
+    --sidebar-w: 270px
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%
+}
+
+body {
+    margin: 0;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink)
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit
+}
+
+button {
+    cursor: pointer
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh
+}
+
+.sidebar {
+    background: #0e1d31;
+    color: #fff;
+    padding: 22px 14px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.sidebar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 8px 10px 24px
+}
+
+.brand small {
+    display: block;
+    font-size: 11px;
+    color: #aebdce;
+    margin-top: 4px;
+    font-weight: 500
+}
+
+/* Burger : caché sur desktop, affiché sur mobile */
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 46px;
+    height: 46px;
+    min-height: 46px;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #2a4a6d;
+    border-radius: 9px;
+    background: #19314f;
+    flex: 0 0 auto
+}
+
+.burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #d8e3ef;
+    border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease
+}
+
+body.menu-open .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg)
+}
+
+body.menu-open .burger span:nth-child(2) {
+    opacity: 0
+}
+
+body.menu-open .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg)
+}
+
+.nav {
+    display: grid;
+    gap: 6px
+}
+
+.nav button {
+    border: 0;
+    background: transparent;
+    color: #d8e3ef;
+    text-align: left;
+    padding: 12px;
+    border-radius: 9px;
+    min-height: 44px
+}
+
+.nav button:hover,
+.nav button.active {
+    background: #19314f;
+    color: #fff
+}
+
+.main {
+    padding: 24px;
+    max-width: 1500px;
+    width: 100%;
+    margin: auto
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 28px
+}
+
+.title p {
+    margin: 5px 0 0;
+    color: var(--muted)
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.btn {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--ink);
+    padding: 10px 14px;
+    border-radius: 9px;
+    font-weight: 650;
+    min-height: 44px
+}
+
+.btn.primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff
+}
+
+.btn.success {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff
+}
+
+.btn.danger {
+    background: #fff0f0;
+    border-color: #f2b5b5;
+    color: var(--danger)
+}
+
+.btn.small {
+    padding: 8px 10px;
+    font-size: 13px;
+    min-height: 38px
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px
+}
+
+.grid {
+    display: grid;
+    gap: 16px
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr))
+}
+
+.section {
+    margin-bottom: 18px
+}
+
+.section h2 {
+    font-size: 18px;
+    margin: 0 0 12px
+}
+
+.field {
+    display: grid;
+    gap: 6px
+}
+
+.field label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #344054
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 10px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    /* évite le zoom automatique sur iOS (< 16 px) */
+    font-size: 16px
+}
+
+.field textarea {
+    min-height: 90px;
+    resize: vertical
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: 2px solid #b8d8f8;
+    border-color: var(--primary)
+}
+
+.field input[type=checkbox],
+.field input[type=radio] {
+    width: auto;
+    min-height: 0
+}
+
+.table-wrap {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: 10px
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px
+}
+
+.data-table th,
+.data-table td {
+    padding: 9px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    text-align: left
+}
+
+.data-table th {
+    background: #f7f9fc;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #667085
+}
+
+.data-table input,
+.data-table select,
+.data-table textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dfe5ec;
+    border-radius: 6px;
+    font-size: 16px
+}
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px
+}
+
+.kpi {
+    padding: 18px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--border)
+}
+
+.kpi strong {
+    font-size: 26px;
+    display: block
+}
+
+.kpi span {
+    color: var(--muted);
+    font-size: 13px
+}
+
+.hidden {
+    display: none !important
+}
+
+.notice {
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: #edf6ff;
+    border: 1px solid #c6e0fa;
+    color: #174a78
+}
+
+.empty {
+    padding: 32px;
+    text-align: center;
+    color: var(--muted)
+}
+
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #182230;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 9px;
+    box-shadow: var(--shadow);
+    z-index: 100
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 30, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 90
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px
+}
+
+.close {
+    border: 0;
+    background: #eef2f6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    font-size: 18px
+}
+
+.toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    flex-wrap: wrap
+}
+
+.print-only {
+    display: none
+}
+
+/* ---------- Tablettes ---------- */
+@media (max-width:950px) {
+    .app {
+        grid-template-columns: 1fr
+    }
+
+    /* Menu latéral remplacé par un panneau coulissant (burger) */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--sidebar-w);
+        max-width: 85vw;
+        height: 100vh;
+        height: 100dvh;
+        padding: 14px;
+        z-index: 80;
+        transform: translateX(-105%);
+        transition: transform .25s ease;
+        will-change: transform
+    }
+
+    body.menu-open .sidebar {
+        transform: none
+    }
+
+    /* Fond assombri derrière le menu ouvert */
+    body.menu-open::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 20, 30, .5);
+        z-index: 70
+    }
+
+    .burger {
+        display: flex
+    }
+
+    .brand {
+        font-size: 17px;
+        padding: 8px 4px 12px
+    }
+
+    .nav {
+        grid-template-columns: 1fr
+    }
+
+    .nav button {
+        padding: 14px 12px;
+        min-height: 48px;
+        font-size: 16px
+    }
+
+    .grid-4,
+    .kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .main {
+        padding: 16px
+    }
+
+    .title h1 {
+        font-size: 24px
+    }
+}
+
+/* ---------- Téléphones ---------- */
+@media (max-width:600px) {
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .kpis {
+        grid-template-columns: 1fr
+    }
+
+    .main {
+        padding: 12px
+    }
+
+    .topbar {
+        flex-direction: column;
+        align-items: stretch
+    }
+
+    .title h1 {
+        font-size: 21px
+    }
+
+    .actions .btn {
+        flex: 1 1 auto
+    }
+
+    .card {
+        padding: 14px;
+        border-radius: 12px
+    }
+
+    .modal {
+        padding: 10px
+    }
+
+    .modal-box {
+        max-height: 92vh;
+        max-height: 92dvh;
+        padding: 14px
+    }
+
+    .data-table {
+        min-width: 620px
+    }
+
+    .toast {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        text-align: center
+    }
+}
+
+/* Impression : le menu burger / voile ne doivent rien cacher */
+@media print {
+
+    .sidebar,
+    .topbar,
+    .actions,
+    .burger,
+    .no-print {
+        display: none !important
+    }
+
+    body.menu-open::after {
+        display: none !important
+    }
+
+    .app {
+        display: block
+    }
+
+    .main {
+        padding: 0
+    }
+
+    .card {
+        box-shadow: none;
+        border: 0
+    }
+
+    .print-only {
+        display: block
+    }
+
+    .page-break {
+        break-before: page
+    }
+}
